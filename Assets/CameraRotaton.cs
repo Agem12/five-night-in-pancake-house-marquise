@@ -9,6 +9,9 @@ public class CameraRotaton : MonoBehaviour
     [SerializeField] private int leftLimiter = 30;
     [SerializeField] private int rightLimiter = 120;
     private float rotationZone = Screen.width / ROTATEDIVIDER;
+    [SerializeField] private Vector3 rotation;
+    private bool isALive = true;
+    
 
 
 
@@ -16,14 +19,26 @@ public class CameraRotaton : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-     if(Input.mousePosition.x<rotationZone&& transform.rotation.eulerAngles.y > leftLimiter)
+        if (isALive == true)
         {
-            transform.Rotate(0, -sensitivity * Time.deltaTime, 0);
+            if (Input.mousePosition.x < rotationZone && transform.rotation.eulerAngles.y > leftLimiter)
+            {
+                transform.Rotate(0, -sensitivity * Time.deltaTime, 0);
 
-        }  
-     if(Input.mousePosition.x>Screen.width-rotationZone&& transform.rotation.eulerAngles.y < rightLimiter)
-        {
-            transform.Rotate(0, sensitivity * Time.deltaTime, 0);
+            }
+            if (Input.mousePosition.x > Screen.width - rotationZone && transform.rotation.eulerAngles.y < rightLimiter)
+            {
+                transform.Rotate(0, sensitivity * Time.deltaTime, 0);
+            }
         }
     }
+    public void Die ()
+    {
+        isALive = false;
+        transform.rotation = Quaternion.Euler(rotation);
+    }
+    
+        
+    
+
 }
