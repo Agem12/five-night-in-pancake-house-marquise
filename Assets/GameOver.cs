@@ -36,13 +36,18 @@ public class GameOver : MonoBehaviour
     }
     private void OnDie ()
     {
+        StartCoroutine(Die());
         for (int i = 0; i < elements.Length; i++)
         {
             DisableElement(elements[i]);
         }
+        
+    }
+    private IEnumerator Die()
+    {
+        yield return new WaitForSeconds(3);
         EnableElement(gemeOver);
     }
-
     
 
 

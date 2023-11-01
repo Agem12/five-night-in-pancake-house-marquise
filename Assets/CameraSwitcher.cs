@@ -5,6 +5,7 @@ using UnityEngine;
 public class CameraSwitcher : MonoBehaviour
 {
     [SerializeField] private Camera[] cameras;
+    [SerializeField] private Player player;
     void Start()
     {
         for (int i = 0; i < cameras.Length; i++)
@@ -27,8 +28,18 @@ public class CameraSwitcher : MonoBehaviour
                 cameras[i].gameObject.SetActive(false);
         }
     }
-    
-    
-        
-    
+    private void OnDie()
+    {
+        ChangeCameras(0);
+    }
+    private void OnEnable()
+    {
+        player.Dead += OnDie;
+    }
+    private void OnDisable()
+    {
+        player.Dead -= OnDie;
+    }
+
+
 }

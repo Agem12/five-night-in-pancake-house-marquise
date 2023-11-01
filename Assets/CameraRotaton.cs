@@ -6,6 +6,7 @@ public class CameraRotaton : MonoBehaviour
 {
     private const int ROTATEDIVIDER = 5;
     [SerializeField] private float sensitivity = 150F;
+    [SerializeField] private Player player;
     [SerializeField] private int leftLimiter = 30;
     [SerializeField] private int rightLimiter = 120;
     private float rotationZone = Screen.width / ROTATEDIVIDER;
@@ -32,13 +33,20 @@ public class CameraRotaton : MonoBehaviour
             }
         }
     }
-    public void Die ()
+    private void Die ()
     {
         isALive = false;
-        transform.rotation = Quaternion.Euler(rotation);
+        print("повернуть камеру");
+        transform.rotation = Quaternion.Euler(0,180,0);
     }
+    private void OnEnable()
+    {
+        player.Dead += Die;
+    }
+    
     
         
     
+
 
 }
